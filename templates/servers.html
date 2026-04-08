@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}服务器管理 - 服务器资源管理系统{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>服务器管理</h1>
+    <button class="btn btn-primary" onclick="showAddServerForm()">添加服务器</button>
+</div>
+
+<div id="add-server-form" class="form-card" style="display:none;">
+    <h3>添加新服务器</h3>
+    <div class="form-row">
+        <input type="text" id="server-name" placeholder="服务器名称" required>
+        <input type="text" id="server-host" placeholder="主机地址 (IP/域名)" required>
+        <input type="number" id="server-port" placeholder="端口" value="22">
+        <input type="text" id="server-tags" placeholder="标签 (逗号分隔)">
+    </div>
+    <div class="form-actions">
+        <button class="btn btn-primary" onclick="addServer()">提交</button>
+        <button class="btn btn-secondary" onclick="hideAddServerForm()">取消</button>
+    </div>
+</div>
+
+<table class="data-table" id="servers-table">
+    <thead>
+        <tr><th>ID</th><th>名称</th><th>主机</th><th>端口</th><th>状态</th><th>启用</th><th>标签</th><th>操作</th></tr>
+    </thead>
+    <tbody></tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script>
+loadServers();
+</script>
+{% endblock %}

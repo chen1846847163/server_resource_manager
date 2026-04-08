@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}任务管理 - 服务器资源管理系统{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>任务管理</h1>
+    <button class="btn btn-primary" onclick="showCreateTaskForm()">创建任务</button>
+</div>
+
+<div id="create-task-form" class="form-card" style="display:none;">
+    <h3>创建测试任务</h3>
+    <div class="form-row">
+        <input type="text" id="task-name" placeholder="任务名称" required>
+    </div>
+    <div class="case-selector">
+        <h4>选择测试用例</h4>
+        <div id="case-checkboxes"></div>
+    </div>
+    <div class="form-actions">
+        <button class="btn btn-primary" onclick="createTask()">提交</button>
+        <button class="btn btn-secondary" onclick="hideCreateTaskForm()">取消</button>
+    </div>
+</div>
+
+<table class="data-table" id="tasks-table">
+    <thead>
+        <tr><th>ID</th><th>名称</th><th>状态</th><th>服务器</th><th>用例数</th><th>创建时间</th><th>完成时间</th><th>操作</th></tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<div id="task-result-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>任务结果</h3>
+            <button class="btn-close" onclick="closeResultModal()">&times;</button>
+        </div>
+        <div id="task-result-body"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+loadTasks();
+loadCasesForSelector();
+setInterval(loadTasks, 5000);
+</script>
+{% endblock %}

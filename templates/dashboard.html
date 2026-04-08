@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}仪表盘 - 服务器资源管理系统{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>仪表盘</h1>
+    <span class="badge" id="refresh-indicator">自动刷新中</span>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-value" id="stat-total-servers">-</div>
+        <div class="stat-label">服务器总数</div>
+    </div>
+    <div class="stat-card stat-online">
+        <div class="stat-value" id="stat-online-servers">-</div>
+        <div class="stat-label">在线可用</div>
+    </div>
+    <div class="stat-card stat-disabled">
+        <div class="stat-value" id="stat-disabled-servers">-</div>
+        <div class="stat-label">已禁用</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value" id="stat-test-cases">-</div>
+        <div class="stat-label">测试用例</div>
+    </div>
+    <div class="stat-card stat-pending">
+        <div class="stat-value" id="stat-pending">-</div>
+        <div class="stat-label">待执行任务</div>
+    </div>
+    <div class="stat-card stat-running">
+        <div class="stat-value" id="stat-running">-</div>
+        <div class="stat-label">执行中</div>
+    </div>
+    <div class="stat-card stat-completed">
+        <div class="stat-value" id="stat-completed">-</div>
+        <div class="stat-label">已完成</div>
+    </div>
+    <div class="stat-card stat-failed">
+        <div class="stat-value" id="stat-failed">-</div>
+        <div class="stat-label">失败</div>
+    </div>
+</div>
+
+<div class="section">
+    <h2>最近任务</h2>
+    <table class="data-table" id="recent-tasks-table">
+        <thead>
+            <tr><th>ID</th><th>名称</th><th>状态</th><th>服务器</th><th>创建时间</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+loadDashboard();
+setInterval(loadDashboard, 5000);
+</script>
+{% endblock %}
